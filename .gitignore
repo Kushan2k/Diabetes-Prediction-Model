@@ -1,4 +1,4 @@
-web/**/.env
-web/**/__pycache__
+**/.env
+**/__pycache__
 .env
 ./.ipynb_checkpoints
