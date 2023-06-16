@@ -14,12 +14,12 @@
   <p class="text-center display-6">Enter your Details here.</p>
   <div class="row ">
     <div class="col-12 col-md-8 col-lg-6 mx-auto px-3 border border-2 py-md-4">
-      <form action="" method="POST">
+      <form action="{{url_for('predict')}}" method="POST">
         {{ csrf_token }}
         <div class="form-row">
           <div class="form-group col">
             <label for="inputEmail4">Name</label>
-            <input type="text" class="form-control" id="inputEmail4" placeholder="Name">
+            <input type="text" name="name" class="form-control" id="inputEmail4" placeholder="Name">
           </div>
           <div class="form-group col">
             <label for="gender">Gender</label>
@@ -30,28 +30,32 @@
             </select>
           </div>
         </div>
-        <div class="form-group">
+        <div class="form-group my-2">
           <label for="inputAddress">Age</label>
-          <input type="number" class="form-control" id="inputAddress" placeholder="23">
+          <input type="number" name="age" class="form-control" id="inputAddress" placeholder="23">
         </div>
-        <div class="form-group">
+        <div class="form-group my-2">
           <label for="inputAddress2">Hypertension</label>
-          <input type="text" class="form-control" id="inputAddress2" placeholder="Hypertension">
+          <input type="text" name="hypertension" class="form-control" id="inputAddress2" placeholder="Hypertension">
         </div>
         <div class="form-row">
-          <div class="form-group col">
+          <div class="form-group col my-2">
             <label for="inputCity">Heart disease</label>
-            <input type="text" class="form-control" id="inputCity">
+            <input type="text" name="hd" class="form-control" id="inputCity">
           </div>
-          <div class="form-group col">
+          <div class="form-group col my-2">
             <label for="inputState">Smoking history</label>
-            <select id="inputState" class="form-control">
+            <select id="inputState" name="smoke" class="form-control">
               <option value="0">Never</option>
             </select>
           </div>
-          <div class="form-group col">
+          <div class="form-group col my-2">
             <label for="inputZip">bmi</label>
-            <input type="text" class="form-control" id="inputZip">
+            <input type="text" name="bmi" class="form-control" id="inputZip">
+          </div>
+          <div class="form-group col my-3">
+            <label for="HbA1c_level">HbA1c level</label>
+            <input type="text" name="HbA1c_level" class="form-control" id="HbA1c_level">
           </div>
         </div>
         <button type="submit" class="btn btn-primary">Check</button>
