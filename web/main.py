@@ -1,4 +1,4 @@
-from flask import Flask,render_template,request,redirect,session,json
+from flask import Flask,render_template,request,redirect,url_for
 from jinja2.exceptions import TemplateNotFound
 from dotenv import load_dotenv
 import joblib
@@ -12,7 +12,6 @@ import joblib
 load_dotenv()
 
 app=Flask(__name__)
-model=joblib.load('../model.joblib')
 
 @app.route("/",methods=['GET'])
 def Index():
@@ -29,6 +28,7 @@ def Index():
 def predict():
     
     data=request.form
+    model=joblib.load('../model.joblib')
 
     try:
         gender=int(data.get('gender'))
@@ -38,13 +38,27 @@ def predict():
         heart_disease=int(data.get('hd'))
         smoking_history=int(data.get('smoke'))
         HbA1c_level=float(data.get('HbA1c_level'))
+        bgl=float(data.get('bgl'))
+
     except Exception:
         return redirect('/')
 
     if not gender in [0,1,2]:
         return redirect('/')
-    
+    if not smoking_history in range(6):
+        return redirect('/')
 
+    std_gl=(bgl-2.786749e-16)/1.000005e+00
+    #['gender' 'age' 'hypertension' 'heart_disease' 'smoking_history' 'bmi'
+#  'HbA1c_level' 'blood_glucose_level']
 
+    ans=model.predict([[gender,age,hypertension,heart_disease,smoking_history,bmi,HbA1c_level,std_gl]])
 
-    return json.dumps(request.form)
+    # return [gender,age,bmi,hypertension,heart_disease,smoking_history,HbA1c_level,bgl,std_gl]
+
+    return redirect(url_for('Results',results=ans[0]))
+
+@app.route("/results",methods=['GET'])
+def Results():
+    res=request.args['results']
+    return render_template('result.html',results=res)

@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+
+{% block page_title %}
+Your Results
+{% endblock page_title %}
+
+{% block content %}
+
+
+<div class="row mt-5">
+  <div class="col-10 col-md-6 mx-auto">
+    <p class="text-center display-6">Your results</p>
+    {% if results=='0' %}
+    <div class="alert alert-success text-center" role="alert">
+      It seems you don't have diabetes.
+      <p class="fw-bold text-success">Nice Work.</p>
+    </div>
+    {% else %}
+    <div class="alert alert-danger" role="alert">
+      We think you have diabetes please be mindfull about your eatings
+      <hr>
+      <p>you can find more <a
+           href="https://www.mayoclinic.org/diseases-conditions/type-2-diabetes/in-depth/diabetes-prevention/art-20047639">Here</a>
+      </p>
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock content %}
