@@ -7,7 +7,7 @@ import joblib
 # male-1
 # other-3
 
-# standers scale z=(X-2.786749e-16)/1.000005e+00
+# standers scale z=(X-138.058060)/40.708136
 
 load_dotenv()
 
@@ -48,13 +48,13 @@ def predict():
     if not smoking_history in range(6):
         return redirect('/')
 
-    std_gl=(bgl-2.786749e-16)/1.000005e+00
+    std_gl=(bgl-138.058060)/40.708136
     #['gender' 'age' 'hypertension' 'heart_disease' 'smoking_history' 'bmi'
 #  'HbA1c_level' 'blood_glucose_level']
 
     ans=model.predict([[gender,age,hypertension,heart_disease,smoking_history,bmi,HbA1c_level,std_gl]])
 
-    # return [gender,age,bmi,hypertension,heart_disease,smoking_history,HbA1c_level,bgl,std_gl]
+    # return [gender,age,hypertension,heart_disease,smoking_history,bmi,HbA1c_level,std_gl]
 
     return redirect(url_for('Results',results=ans[0]))
 
